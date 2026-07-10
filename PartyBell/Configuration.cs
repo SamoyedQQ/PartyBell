@@ -15,8 +15,8 @@ public class Configuration : IPluginConfiguration
     // 只在玩家掛 AFK 狀態時才發送通知
     public bool OnlyWhenAfk = false;
 
-    // 偵測到變動時同時在遊戲內跳出通知視窗
-    public bool PopupOnNotify = false;
+    // 人在副本內時不發送任何通知
+    public bool MuteInDuty = true;
 
     public bool NotifyPartyJoinLeave = true;
     public bool NotifyPartyChat = true;

@@ -1,4 +1,3 @@
-using Dalamud.Interface.ImGuiNotification;
 using ECommons.DalamudServices;
 using System;
 using System.Collections.Concurrent;
@@ -39,25 +38,10 @@ public sealed class WebhookClient : IDisposable
 
     public void Enqueue(string title, string? description, int color, bool mention = false)
     {
-        if (config.PopupOnNotify)
-            ShowGamePopup(title, description);
-
         if (string.IsNullOrWhiteSpace(config.WebhookUrl))
             return;
         queue.Enqueue(new EmbedData(Truncate(title, 256), Sanitize(description), color, DateTime.UtcNow, mention));
         signal.Release();
-    }
-
-    private static void ShowGamePopup(string title, string? description)
-    {
-        Svc.Framework.RunOnFrameworkThread(() =>
-            Svc.NotificationManager.AddNotification(new Notification
-            {
-                Title = title,
-                Content = description ?? string.Empty,
-                Type = NotificationType.Info,
-                InitialDuration = TimeSpan.FromSeconds(8),
-            }));
     }
 
     public Task<bool> SendTestAsync()

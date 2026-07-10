@@ -6,6 +6,7 @@ using ECommons.Throttlers;
 using ECommons.UIHelpers.AddonMasterImplementations;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using PartyBell.Discord;
+using PartyBell.Util;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -139,7 +140,7 @@ public sealed class RecruitmentRefresher : IDisposable
                     RefreshCount++;
                     failCount = 0;
                     Svc.Log.Info($"[PartyBell] 招募已重新發布(第 {RefreshCount} 次)");
-                    if (config.NotifyOnRefresh)
+                    if (config.NotifyOnRefresh && !NotifyGate.MutedByDuty(config))
                         webhook.Enqueue("🔄 招募已自動刷新", $"已重新發布招募(第 {RefreshCount} 次)", WebhookClient.ColorInfo);
                 }
                 else
@@ -147,7 +148,7 @@ public sealed class RecruitmentRefresher : IDisposable
                     failCount++;
                     nextAttemptUtc = DateTime.UtcNow.AddMinutes(1);
                     Svc.Log.Warning($"[PartyBell] 招募刷新失敗(連續 {failCount} 次)");
-                    if (config.NotifyOnRefresh || failCount >= MaxConsecutiveFails)
+                    if ((config.NotifyOnRefresh || failCount >= MaxConsecutiveFails) && !NotifyGate.MutedByDuty(config))
                     {
                         var halted = failCount >= MaxConsecutiveFails;
                         webhook.Enqueue("⚠️ 招募刷新失敗",

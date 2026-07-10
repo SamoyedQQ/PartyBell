@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <Authors>WhiteDog</Authors>
-        <Version>1.0.0.0</Version>
+        <Version>1.0.1.0</Version>
         <Description>Party notifications to Discord webhook and auto recruitment refresh.</Description>
     </PropertyGroup>
 

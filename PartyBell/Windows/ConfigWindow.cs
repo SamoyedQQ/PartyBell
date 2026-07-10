@@ -5,6 +5,7 @@ using ECommons.PartyFunctions;
 using ImGuiNET;
 using PartyBell.Discord;
 using PartyBell.Recruitment;
+using PartyBell.Util;
 using System;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -123,14 +124,14 @@ public class ConfigWindow : Window
             config.Save();
         }
 
-        var popup = config.PopupOnNotify;
-        if (ImGui.Checkbox("偵測到變動時跳出視窗", ref popup))
+        var muteInDuty = config.MuteInDuty;
+        if (ImGui.Checkbox("進入副本後不通知", ref muteInDuty))
         {
-            config.PopupOnNotify = popup;
+            config.MuteInDuty = muteInDuty;
             config.Save();
         }
         if (ImGui.IsItemHovered())
-            ImGui.SetTooltip("通知發送時同時在遊戲畫面右下角跳出通知視窗");
+            ImGui.SetTooltip("人在副本內時,一律不發送任何通知。");
 
         ImGui.Spacing();
         ImGui.TextDisabled("通知類型                          Tag = 同時 @ 提及");
@@ -219,6 +220,8 @@ public class ConfigWindow : Window
     private void DrawStatusTab()
     {
         DrawPartyStatus();
+        if (NotifyGate.MutedByDuty(config))
+            ImGui.TextColored(WarnColor, "⚠ 目前在副本內,通知已暫停");
         ImGui.Separator();
 
         if (!refresher.IsRecruiting)
