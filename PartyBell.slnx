@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/ECommons/">
+    <Project Path="ECommons/ECommons/ECommons.csproj" />
+  </Folder>
+  <Project Path="PartyBell/PartyBell.csproj" />
+</Solution>
