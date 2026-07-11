@@ -60,8 +60,10 @@ public sealed class PartyListener : IDisposable
             return;
         }
 
-        if (config.NotifyPartyFull && current.Count >= 8 && snapshot.Count < 8 && NotifyGate.ShouldNotify(config))
-            webhook.Enqueue("🎉 隊伍滿員!(8/8)", "所有位置已補滿,可以出發了", WebhookClient.ColorJoin, config.MentionOnPartyFull);
+        // 團隊任務(跨界大型副本)滿員為 24 人,一般隊伍為 8 人
+        var fullSize = UniversalParty.IsAlliance ? 24 : 8;
+        if (config.NotifyPartyFull && current.Count >= fullSize && snapshot.Count < fullSize && NotifyGate.ShouldNotify(config))
+            webhook.Enqueue($"🎉 隊伍滿員!({fullSize}/{fullSize})", "所有位置已補滿,可以出發了", WebhookClient.ColorJoin, config.MentionOnPartyFull);
 
         if (config.NotifyPartyJoinLeave && NotifyGate.ShouldNotify(config))
         {

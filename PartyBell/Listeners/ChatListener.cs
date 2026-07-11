@@ -34,9 +34,13 @@ public sealed class ChatListener : IDisposable
         {
             case XivChatType.Party:
             case XivChatType.CrossParty:
-            case XivChatType.Alliance:
                 if (config.NotifyPartyChat && !IsSelf(sender))
                     webhook.Enqueue($"💬 {SenderName(sender)}", message.TextValue, WebhookClient.ColorChat, config.MentionOnPartyChat);
+                break;
+
+            case XivChatType.Alliance:
+                if (config.NotifyAllianceChat && !IsSelf(sender))
+                    webhook.Enqueue($"📣 團隊:{SenderName(sender)}", message.TextValue, WebhookClient.ColorAlliance, config.MentionOnAllianceChat);
                 break;
 
             case XivChatType.TellIncoming:

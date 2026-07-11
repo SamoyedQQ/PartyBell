@@ -140,6 +140,7 @@ public class ConfigWindow : Window
         DrawToggle("隊員加入/退出", ref config.NotifyPartyJoinLeave, ref config.MentionOnPartyJoinLeave);
         DrawToggle("隊伍滿員 (8人)", ref config.NotifyPartyFull, ref config.MentionOnPartyFull);
         DrawToggle("隊伍頻道訊息", ref config.NotifyPartyChat, ref config.MentionOnPartyChat);
+        DrawToggle("團隊訊息 (24人)", ref config.NotifyAllianceChat, ref config.MentionOnAllianceChat);
         DrawToggle("密語 (Tell)", ref config.NotifyTell, ref config.MentionOnTell);
         DrawToggle("副本排到 (Duty Pop)", ref config.NotifyDutyPop, ref config.MentionOnDutyPop);
     }

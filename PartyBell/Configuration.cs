@@ -20,6 +20,7 @@ public class Configuration : IPluginConfiguration
 
     public bool NotifyPartyJoinLeave = true;
     public bool NotifyPartyChat = true;
+    public bool NotifyAllianceChat = true;
     public bool NotifyTell = true;
     public bool NotifyDutyPop = true;
     public bool NotifyPartyFull = true;
@@ -29,6 +30,7 @@ public class Configuration : IPluginConfiguration
     // 各通知類型是否同時 tag
     public bool MentionOnPartyJoinLeave = false;
     public bool MentionOnPartyChat = false;
+    public bool MentionOnAllianceChat = false;
     public bool MentionOnTell = false;
     public bool MentionOnDutyPop = true;
     public bool MentionOnPartyFull = true;

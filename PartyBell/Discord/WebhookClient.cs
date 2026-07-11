@@ -16,6 +16,7 @@ public sealed class WebhookClient : IDisposable
     public const int ColorJoin = 0x2ECC71;   // 綠
     public const int ColorLeave = 0xE74C3C;  // 紅
     public const int ColorChat = 0x3498DB;   // 藍
+    public const int ColorAlliance = 0x1ABC9C; // 青
     public const int ColorTell = 0x9B59B6;   // 紫
     public const int ColorSystem = 0xF1C40F; // 黃
     public const int ColorDuty = 0xE67E22;   // 橘
